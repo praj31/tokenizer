@@ -9,7 +9,11 @@ const Home: NextPage = () => {
 			<Navbar />
 			<main className='container'>
 				{fieldsDataArray.map((field, index) => (
-					<Field title={field.title} key={index} />
+					<Field
+						key={index}
+						title={field.title}
+						generate={field.generate}
+					/>
 				))}
 			</main>
 		</>

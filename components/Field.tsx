@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react'
+import { FieldInputType } from '../types'
 
-interface Props {
-	title: string
-}
-
-export const Field: React.FunctionComponent<Props> = ({ title }) => {
+export const Field: React.FunctionComponent<FieldInputType> = ({
+	title,
+	generate,
+}) => {
 	const [copied, setCopied] = useState<boolean>(false)
+	const [key, setKey] = useState<string>('')
 
 	useEffect(() => {
 		if (copied) {
+			navigator.clipboard.writeText(key)
 			setTimeout(() => {
 				setCopied(false)
 			}, 5000)
 		}
 	}, [copied])
 
-	const generate = () => {
+	const handleGenerate = () => {
 		setCopied(false)
+		const keyValue = generate()
+		setKey(keyValue)
 	}
 
 	return (
@@ -24,16 +28,17 @@ export const Field: React.FunctionComponent<Props> = ({ title }) => {
 			<div className='field-header'>
 				<p>{title}</p>
 				<div className='field-action-button'>
-					<button onClick={generate}>Generate</button>
+					<button onClick={handleGenerate}>Generate</button>
 				</div>
 			</div>
 			<div className='field-body'>
 				<div>
-					<input id='field-input' type='text' />
+					<input readOnly id='field-input' type='text' value={key} />
 					<button
 						className={
 							copied ? 'field-button-active' : 'field-button'
 						}
+						disabled={!key}
 						id='field-button'
 						onClick={() => setCopied(true)}
 					>

@@ -36,12 +36,16 @@ nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 100;
+	position: fixed;
+	top: 0;
 }
 
 .container {
 	width: 100%;
 	margin: 2rem 0;
 	padding: 0 12%;
+	margin-top: 6rem;
 }
 
 .field-wrapper {
@@ -115,4 +119,26 @@ nav {
 #clipboard-icon {
 	width: 1.2rem;
 	height: 1.2rem;
+}
+
+button:disabled #clipboard-icon {
+	opacity: 0.2;
+}
+
+@media screen and (min-width: 1400px) {
+	html {
+		font-size: 24px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	html {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	html {
+		font-size: 13px;
+	}
 }
